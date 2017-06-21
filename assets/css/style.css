@@ -90,8 +90,54 @@
 /* CONDUCE */
 .conduce{
 	background-image: url('../img/conduce.jpg');
-	height: 70vh;
+	height: 60vh;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
+}
+
+.conduce .transparencia{
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+	padding: auto 20px;
+}
+
+.conduce .transparencia h3{
+	font-size: 25px;
+}
+
+.conduce .transparencia p{
+	font-size: 17px;
+}
+
+.conduce .transparencia button{
+	background-color: #F7B617;
+	font-size: 17px;
+}
+
+/* TARIFA */
+.tarifa{
+	background-color: #F7B617;
+}
+
+.tarifa .tarifario{
+	margin-top: 80px;
+	margin-left: 80px;
+	margin-right: 0;
+}
+
+.tarifa h3,h4{
+	color: white;
+}
+#map{
+	width: 40%;
+	height: 65vh;
+	border: 2px solid white;
+	margin: 50px 0 50px 0;
+	padding: 15px;
+}
+
+/* FOOTER */
+footer{
+	background-color: #2B2B2B;
 }
