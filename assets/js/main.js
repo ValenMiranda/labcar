@@ -1,41 +1,39 @@
 function initMap(){
 
-	var map = new google.maps.Map(document.getElementById("map"),{
-		zoom: 5,
-		center: {lat: -9.1191427, lng: -77.0349046},
-		mapTypeControl: false,
-		zoomControl: false,
-		streetViewControl: false
-	});
+  var map = new google.maps.Map(document.getElementById("map"),{
+    zoom: 5,
+    center: {lat: -9.1191427, lng: -77.0349046},
+    mapTypeControl: false,
+    zoomControl: false,
+    streetViewControl: false
+  });
 
-	function buscar(){
-		if(navigator.geolocation){
-			navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
-		}
-	}
+  function buscar(){
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
+    }
+  }
+    window.addEventListener("load", buscar);
 
-	window.addEventListener("load", buscar);
+  var latitud, longitud;
 
-	var latitud, longitud;
-
-	var funcionExito = function(posicion){
-		latitud = posicion.coords.latitude;
-		longitud = posicion.coords.longitude;
-
-		var miUbicacion = new google.maps.Marker({
-			position: {lat: latitud, lng: longitud},
-			animacion: google.maps.Animation.DROP,
-			map: map,
+  var funcionExito = function(posicion){
+    latitud = posicion.coords.latitude;
+    longitud = posicion.coords.longitude;
+    var image = 'https://www.mypedalthecause.org/images/profile%20icon%20bike.png';
+    var miUbicacion = new google.maps.Marker({
+      position: {lat: latitud, lng: longitud},
+      animacion: google.maps.Animation.DROP,
+      map: map,
       icon: image
-
     });
+    map.setZoom(17);
+    map.setCenter({lat: latitud, lng: longitud});
+  }
+  var funcionError = function(error){
+    alert("tenemos problemas para encontrar tu ubicación");
+  }
 
-		map.setZoom(17);
-		map.setCenter({lat: latitud, lng: longitud});
-	}
-	var funcionError = function(error){
-		alert("tenemos problemas para encontrar tu ubicación");
-	}
 
   var map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false,
@@ -114,12 +112,12 @@ function initMap(){
           return;
         }
         var me = this;
-        var image = 'http://www.adktrailmap.com/webmap/images/biking.png';
+        var image = 'https://www.mypedalthecause.org/images/profile%20icon%20bike.png';
         this.directionsService.route({
           origin: {'placeId': this.originPlaceId},
           destination: {'placeId': this.destinationPlaceId},
           travelMode: this.travelMode,
-          
+
         }, function(response, status) {
           if (status === 'OK') {
             document.getElementById("ruta").addEventListener("click", function(){
@@ -130,6 +128,8 @@ function initMap(){
           }
         });
 
-        
+
       };
-    }
+
+
+

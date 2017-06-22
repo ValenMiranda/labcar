@@ -1,11 +1,23 @@
-@media (min-width: 1px) and (max-height: 768){
-	.menu-nav{
-		display: none;
+@media (max-height: 768){
+	.lista-footer{
+		display: flex;
+		flex-wrap: wrap-reverse;
 	}
-}
+	.lista-footer[class*="col-"]{
+		display: inline;
+	}
+	.social-footer{
+		order: 4;
+		height: 10px;
+		text-align: right;
+	}
+	.link-footer{
+		padding: 0;
+		padding-top: 10px;
+	}
+	.link-footer img{
+		width: 100%;
+		margin-top: 20px;
+	}
 
-@media (min-width: 768px){
-	.menu-nav{
-		display: none;
-	}
 }
