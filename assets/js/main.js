@@ -1,4 +1,4 @@
-(function initMap(){
+function initMap(){
 
 	var map = new google.maps.Map(document.getElementById("map"),{
 		zoom: 5,
@@ -13,20 +13,23 @@
 			navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
 		}
 	}
-	document.getElementById("encuentrame").addEventListener("click", buscar);
+
+	window.addEventListener("load", buscar);
 
 	var latitud, longitud;
 
 	var funcionExito = function(posicion){
 		latitud = posicion.coords.latitude;
 		longitud = posicion.coords.longitude;
-		var image = 'https://www.mypedalthecause.org/images/profile%20icon%20bike.png';
+
 		var miUbicacion = new google.maps.Marker({
 			position: {lat: latitud, lng: longitud},
 			animacion: google.maps.Animation.DROP,
 			map: map,
-			icon: image
-		});
+      icon: image
+
+    });
+
 		map.setZoom(17);
 		map.setCenter({lat: latitud, lng: longitud});
 	}
@@ -34,99 +37,99 @@
 		alert("tenemos problemas para encontrar tu ubicación");
 	}
 
+  var map = new google.maps.Map(document.getElementById('map'), {
+    mapTypeControl: false,
+    center: {lat: -9.1191427, lng: -77.0349046},
+    zoom: 5
+  });
 
-	var map = new google.maps.Map(document.getElementById('map'), {
-		mapTypeControl: false,
-		center: {lat: -9.1191427, lng: -77.0349046},
-		zoom: 5
-	});
-
-	new AutocompleteDirectionsHandler(map);
-});
+  new AutocompleteDirectionsHandler(map);
+}
 
        /**
         * @constructor
         */
         function AutocompleteDirectionsHandler(map) {
-        	this.map = map;
-        	this.originPlaceId = null;
-        	this.destinationPlaceId = null;
-        	this.travelMode = 'WALKING';
-        	var originInput = document.getElementById('origin-input');
-        	var destinationInput = document.getElementById('destination-input');
-        	var modeSelector = document.getElementById('mode-selector');
-        	this.directionsService = new google.maps.DirectionsService;
-        	this.directionsDisplay = new google.maps.DirectionsRenderer;
-        	this.directionsDisplay.setMap(map);
+          this.map = map;
+          this.originPlaceId = null;
+          this.destinationPlaceId = null;
+          this.travelMode = 'WALKING';
+          var originInput = document.getElementById('origin-input');
+          var destinationInput = document.getElementById('destination-input');
+          var modeSelector = document.getElementById('mode-selector');
+          this.directionsService = new google.maps.DirectionsService;
+          this.directionsDisplay = new google.maps.DirectionsRenderer;
+          this.directionsDisplay.setMap(map);
 
-        	var originAutocomplete = new google.maps.places.Autocomplete(
-        		originInput, {placeIdOnly: true});
-        	var destinationAutocomplete = new google.maps.places.Autocomplete(
-        		destinationInput, {placeIdOnly: true});
+          var originAutocomplete = new google.maps.places.Autocomplete(
+            originInput, {placeIdOnly: true});
+          var destinationAutocomplete = new google.maps.places.Autocomplete(
+            destinationInput, {placeIdOnly: true});
 
-        	this.setupClickListener('changemode-walking', 'WALKING');
-        	this.setupClickListener('changemode-transit', 'TRANSIT');
-        	this.setupClickListener('changemode-driving', 'DRIVING');
+          this.setupClickListener('changemode-walking', 'WALKING');
+          this.setupClickListener('changemode-transit', 'TRANSIT');
+          this.setupClickListener('changemode-driving', 'DRIVING');
 
-        	this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-        	this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+          this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+          this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
 
         //this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
         //this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
-    }
+      }
 
       // Sets a listener on a radio button to change the filter type on Places
       // Autocomplete.
       AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
-      	var radioButton = document.getElementById(id);
-      	var me = this;
-      	radioButton.addEventListener('click', function() {
-      		me.travelMode = mode;
-      		me.route();
-      	});
+        var radioButton = document.getElementById(id);
+        var me = this;
+        radioButton.addEventListener('click', function() {
+          me.travelMode = mode;
+          me.route();
+        });
       };
 
       AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
-      	var me = this;
-      	autocomplete.bindTo('bounds', this.map);
-      	autocomplete.addListener('place_changed', function() {
-      		var place = autocomplete.getPlace();
-      		if (!place.place_id) {
-      			window.alert("Please select an option from the dropdown list.");
-      			return;
-      		}
-      		if (mode === 'ORIG') {
-      			me.originPlaceId = place.place_id;
-      		} else {
-      			me.destinationPlaceId = place.place_id;
-      		}
-      		me.route();
-      	});
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.place_id) {
+            window.alert("Please select an option from the dropdown list.");
+            return;
+          }
+          if (mode === 'ORIG') {
+            me.originPlaceId = place.place_id;
+          } else {
+            me.destinationPlaceId = place.place_id;
+          }
+          me.route();
+        });
 
       };
 
 
       AutocompleteDirectionsHandler.prototype.route = function() {
-      	if (!this.originPlaceId || !this.destinationPlaceId) {
-      		return;
-      	}
-      	var me = this;
-      	var image = 'https://www.mypedalthecause.org/images/profile%20icon%20bike.png';
-      	this.directionsService.route({
-      		origin: {'placeId': this.originPlaceId},
-      		destination: {'placeId': this.destinationPlaceId},
-      		travelMode: this.travelMode,
+        if (!this.originPlaceId || !this.destinationPlaceId) {
+          return;
+        }
+        var me = this;
+        var image = 'http://www.adktrailmap.com/webmap/images/biking.png';
+        this.directionsService.route({
+          origin: {'placeId': this.originPlaceId},
+          destination: {'placeId': this.destinationPlaceId},
+          travelMode: this.travelMode,
+          
+        }, function(response, status) {
+          if (status === 'OK') {
+            document.getElementById("ruta").addEventListener("click", function(){
+              me.directionsDisplay.setDirections(response);
+            });
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
 
-      	}, function(response, status) {
-      		if (status === 'OK') {
-      			document.getElementById("ruta").addEventListener("click", function(){
-      				me.directionsDisplay.setDirections(response);
-      			});
-      		} else {
-      			window.alert('Directions request failed due to ' + status);
-      		}
-      	});
-
-
+        
       };
+    }

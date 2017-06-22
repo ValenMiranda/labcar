@@ -27,7 +27,7 @@
 			</button>
 			<a class="navbar-brand logo img-responsive" href="#"><img src="assets/img/logo.png" alt=""></a>
 		</div>
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<div class="collapse navbar-collapse navbar-ex1-collapse menu-nav">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">Viaja</a></li>
 				<li><a href="#">Conduce</a></li>
@@ -91,8 +91,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 tarifario">
-					<h3>Tarifas</h3>
-					<h4>Consulta las tarifas Labcar aquí</h4>
+					<h3 class="text-tarifa">Tarifas</h3>
+					<h4 class="text-tarifa">Consulta las tarifas Labcar aquí</h4>
 					<div>
 						<label for="origin"><img src="assets/img/circulo.png" alt=""></label>
 						<input id="origin-input" class="controls" type="text" placeholder="Elige su punto de partida">
@@ -104,6 +104,7 @@
 					<div>
 						<button type="button" class="btn btn-conductor" id="ruta">¡Trazar ruta!</button>
 					</div>
+					<div class="resultado" id="output"></div>
 				</div>
 				<div class="col-md-6 col-lg-6 col-lg-offset-6 col-md-offset-7" id="map">
 					<!-- Aquí ira nuestro mapa -->

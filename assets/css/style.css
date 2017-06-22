@@ -126,7 +126,7 @@
 	margin-right: 0;
 }
 
-.tarifa h3, .tarifa h4{
+.text-tarifa{
 	color: white;
 }
 
@@ -155,7 +155,7 @@
 	width: 65vh;
 	height: 65vh;
 	border: 2px solid white;
-	margin: 50px 0 50px 0;
+	margin: 50px 0;
 	padding: 15px;
 }
 
